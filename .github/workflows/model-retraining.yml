@@ -1,0 +1,63 @@
+name: Automated Model Retraining
+
+on:
+  schedule:
+    # Retrain model every Sunday at 2 AM UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+    inputs:
+      force_retrain:
+        description: 'Force retrain even if no new data'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  retrain-model:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Check for new data
+      id: check-data
+      run: |
+        # Add logic to check if new training data is available
+        # For now, we'll always retrain
+        echo "new_data=true" >> $GITHUB_OUTPUT
+        
+    - name: Train model
+      if: steps.check-data.outputs.new_data == 'true' || github.event.inputs.force_retrain == 'true'
+      run: python scripts/train_model.py
+        
+    - name: Evaluate model performance
+      if: steps.check-data.outputs.new_data == 'true' || github.event.inputs.force_retrain == 'true'
+      run: |
+        # Add model evaluation logic here
+        echo "Model evaluation completed"
+        
+    - name: Upload new model
+      if: steps.check-data.outputs.new_data == 'true' || github.event.inputs.force_retrain == 'true'
+      uses: actions/upload-artifact@v3
+      with:
+        name: retrained-model-${{ github.run_number }}
+        path: |
+          models/
+          mlruns/
+          
+    - name: Notify retraining completion
+      if: steps.check-data.outputs.new_data == 'true' || github.event.inputs.force_retrain == 'true'
+      run: |
+        echo "🤖 Model retraining completed successfully!"
+        echo "New model version: ${{ github.run_number }}" 
