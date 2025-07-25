@@ -1,0 +1,18 @@
+#! churn-api-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: churn-api
+    namespace: assignment2
+    labels:
+        com.docker.compose.project: assignment2
+        com.docker.compose.service: churn-api
+spec:
+    selector:
+        com.docker.compose.project: assignment2
+        com.docker.compose.service: churn-api
+    ports:
+        - name: churn-api-8000
+          port: 8000
+          targetPort: churn-api-8000

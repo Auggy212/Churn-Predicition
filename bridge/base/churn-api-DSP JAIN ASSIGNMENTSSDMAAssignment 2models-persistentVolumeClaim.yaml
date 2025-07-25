@@ -1,0 +1,18 @@
+#! churn-api-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\models-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: churn-api-d--sp-jain-assignments-sdma-assignment-2-models
+    namespace: assignment2
+    labels:
+        com.docker.compose.service: churn-api
+        com.docker.compose.volume: D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\models
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi

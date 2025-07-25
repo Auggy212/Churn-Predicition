@@ -1,0 +1,11 @@
+#! mlflow-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: mlflow-published
+    namespace: assignment2
+spec:
+    type: LoadBalancer
+
+# check if there is at least one published port

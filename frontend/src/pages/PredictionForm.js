@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Brain, AlertCircle, CheckCircle, Loader } from 'lucide-react';
 import axios from 'axios';
+import config from '../config';
 
 const PredictionForm = () => {
   const [formData, setFormData] = useState({
@@ -49,7 +50,7 @@ const PredictionForm = () => {
         customer_service_calls: parseInt(formData.customer_service_calls)
       };
 
-      const response = await axios.post('/predict', requestData);
+      const response = await axios.post(`${config.apiBaseUrl}${config.endpoints.predict}`, requestData);
       setPrediction(response.data);
     } catch (err) {
       setError(err.response?.data?.detail || 'An error occurred while making the prediction');

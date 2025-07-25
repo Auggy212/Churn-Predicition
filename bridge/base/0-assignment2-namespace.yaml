@@ -1,0 +1,8 @@
+#! 0-assignment2-namespace.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: assignment2
+    labels:
+        com.docker.compose.project: assignment2

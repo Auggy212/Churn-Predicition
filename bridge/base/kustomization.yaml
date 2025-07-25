@@ -1,0 +1,30 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - 0-assignment2-namespace.yaml
+    - churn-api-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\models-persistentVolumeClaim.yaml
+    - churn-api-deployment.yaml
+    - churn-api-expose.yaml
+    - churn-api-service.yaml
+    - frontend-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\frontend\src-persistentVolumeClaim.yaml
+    - frontend-deployment.yaml
+    - frontend-expose.yaml
+    - frontend-service.yaml
+    - grafana-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\grafana\dashboards-persistentVolumeClaim.yaml
+    - grafana-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\grafana\datasources-persistentVolumeClaim.yaml
+    - grafana-deployment.yaml
+    - grafana-expose.yaml
+    - grafana-grafana_data-persistentVolumeClaim.yaml
+    - grafana-service.yaml
+    - mlflow-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\mlruns-persistentVolumeClaim.yaml
+    - mlflow-deployment.yaml
+    - mlflow-expose.yaml
+    - mlflow-service.yaml
+    - mlops-network-network-policy.yaml
+    - prometheus-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\prometheus.yml-persistentVolumeClaim.yaml
+    - prometheus-deployment.yaml
+    - prometheus-expose.yaml
+    - prometheus-prometheus_data-persistentVolumeClaim.yaml
+    - prometheus-service.yaml

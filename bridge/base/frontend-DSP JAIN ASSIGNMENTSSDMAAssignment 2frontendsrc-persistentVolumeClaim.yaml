@@ -1,0 +1,18 @@
+#! frontend-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\frontend\src-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: frontend-d--sp-jain-assignments-sdma-assignment-2-frontend-src
+    namespace: assignment2
+    labels:
+        com.docker.compose.service: frontend
+        com.docker.compose.volume: D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\frontend\src
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi

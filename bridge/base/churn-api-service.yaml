@@ -1,0 +1,23 @@
+# check if there is at least one published port
+
+#! churn-api-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: churn-api-published
+    namespace: assignment2
+    labels:
+        com.docker.compose.project: assignment2
+        com.docker.compose.service: churn-api
+spec:
+    selector:
+        com.docker.compose.project: assignment2
+        com.docker.compose.service: churn-api
+    ports:
+        - name: churn-api-8000
+          port: 8000
+          protocol: TCP
+          targetPort: churn-api-8000
+
+# check if there is at least one published port

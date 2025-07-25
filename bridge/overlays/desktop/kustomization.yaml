@@ -1,0 +1,20 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - ../../base
+patches:
+    - path: churn-api-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\models-persistentVolumeClaim.yaml
+    - path: churn-api-service.yaml
+    - path: frontend-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\frontend\src-persistentVolumeClaim.yaml
+    - path: frontend-service.yaml
+    - path: grafana-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\grafana\dashboards-persistentVolumeClaim.yaml
+    - path: grafana-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\grafana\datasources-persistentVolumeClaim.yaml
+    - path: grafana-grafana_data-persistentVolumeClaim.yaml
+    - path: grafana-service.yaml
+    - path: mlflow-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\mlruns-persistentVolumeClaim.yaml
+    - path: mlflow-service.yaml
+    - path: prometheus-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\prometheus.yml-persistentVolumeClaim.yaml
+    - path: prometheus-prometheus_data-persistentVolumeClaim.yaml
+    - path: prometheus-service.yaml

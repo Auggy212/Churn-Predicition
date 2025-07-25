@@ -1,0 +1,48 @@
+#! churn-api-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: churn-api
+    namespace: assignment2
+    labels:
+        com.docker.compose.project: assignment2
+        com.docker.compose.service: churn-api
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: assignment2
+            com.docker.compose.service: churn-api
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: assignment2
+                com.docker.compose.service: churn-api
+                com.docker.compose.network.mlops-network: "true"
+        spec:
+            containers:
+                - name: churn-api
+                  image: assignment2-churn-api
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: PYTHONPATH
+                      value: "/app"
+                  livenessProbe:
+                    exec:
+                        command: ['curl -f http://localhost:8000/health']
+                    periodSeconds: 30
+                    timeoutSeconds: 10
+                    failureThreshold: 3
+                  ports:
+                    - name: churn-api-8000
+                      containerPort: 8000
+                  volumeMounts:
+                    - name: app-models
+                      mountPath: /app/models
+            volumes:
+                - name: app-models
+                  hostPath:
+                    path: D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\models

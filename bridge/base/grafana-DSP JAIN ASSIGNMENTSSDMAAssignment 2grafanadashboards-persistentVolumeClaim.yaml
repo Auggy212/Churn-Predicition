@@ -1,0 +1,18 @@
+#! grafana-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\grafana\dashboards-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: grafana-d--sp-jain-assignments-sdma-assignment-2-grafana-dashboards
+    namespace: assignment2
+    labels:
+        com.docker.compose.service: grafana
+        com.docker.compose.volume: D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\grafana\dashboards
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi

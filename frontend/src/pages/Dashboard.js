@@ -11,6 +11,7 @@ import {
   Clock
 } from 'lucide-react';
 import axios from 'axios';
+import config from '../config';
 
 const Dashboard = () => {
   const [healthStatus, setHealthStatus] = useState(null);
@@ -21,8 +22,8 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const [healthResponse, modelResponse] = await Promise.all([
-          axios.get('/health'),
-          axios.get('/model-info')
+          axios.get(`${config.apiBaseUrl}${config.endpoints.health}`),
+          axios.get(`${config.apiBaseUrl}${config.endpoints.modelInfo}`)
         ]);
         setHealthStatus(healthResponse.data);
         setModelInfo(modelResponse.data);

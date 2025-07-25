@@ -7,21 +7,27 @@ rule_files:
   # - "second_rules.yml"
 
 scrape_configs:
-  # Prometheus itself
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
     static_configs:
       - targets: ['localhost:9090']
 
-  # FastAPI Application
-  - job_name: 'churn-api'
+  # Scrape the FastAPI application
+  - job_name: 'churn-prediction-api'
     static_configs:
       - targets: ['churn-api:8000']
     metrics_path: '/metrics'
     scrape_interval: 10s
     scrape_timeout: 5s
 
-  # MLflow
-  - job_name: 'mlflow'
+  # Scrape the FastAPI application's custom Prometheus endpoint
+  - job_name: 'churn-prediction-api-custom'
     static_configs:
-      - targets: ['mlflow:5000']
-    scrape_interval: 30s 
+      - targets: ['churn-api:8000']
+    metrics_path: '/prometheus'
+    scrape_interval: 10s
+    scrape_timeout: 5s 

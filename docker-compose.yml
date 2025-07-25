@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  # FastAPI Application
+  # FastAPI Application with integrated Prometheus monitoring
   churn-api:
     build: .
     ports:
@@ -18,7 +16,7 @@ services:
     networks:
       - mlops-network
 
-  # Prometheus for metrics collection
+  # Standalone Prometheus Server
   prometheus:
     image: prom/prometheus:latest
     ports:
@@ -35,6 +33,8 @@ services:
       - '--web.enable-lifecycle'
     networks:
       - mlops-network
+    depends_on:
+      - churn-api
 
   # Grafana for visualization
   grafana:
@@ -85,8 +85,8 @@ services:
       - mlops-network
 
 volumes:
-  prometheus_data:
   grafana_data:
+  prometheus_data:
 
 networks:
   mlops-network:

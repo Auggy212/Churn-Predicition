@@ -1,0 +1,9 @@
+#! prometheus-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\prometheus.yml-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: prometheus-d--sp-jain-assignments-sdma-assignment-2-prometheus-yml
+    namespace: assignment2
+spec:
+    storageClassName: "hostpath" # see docker/desktop-storage-provisioner

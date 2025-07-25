@@ -5,4 +5,18 @@ datasources:
     type: prometheus
     access: proxy
     url: http://prometheus:9090
-    isDefault: true 
+    isDefault: true
+    editable: true
+    jsonData:
+      timeInterval: "15s"
+      queryTimeout: "60s"
+      httpMethod: "GET"
+      manageAlerts: false
+      alertmanagerUid: ""
+      disableRecordingRules: false
+      incrementalQueryOverlapWindow: "10m"
+      incrementalQueryOverlapWindowEnabled: false
+      cacheLevel: "None"
+      prometheusType: "Prometheus"
+      prometheusVersion: "1.0.0"
+    secureJsonData: {} 

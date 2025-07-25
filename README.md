@@ -15,17 +15,23 @@ This project demonstrates a complete MLOps workflow including:
 ## 🏗️ Architecture
 
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Jupyter       │    │   FastAPI       │    │   Prometheus    │
-│   Notebook      │───▶│   Application   │───▶│   Metrics       │
-│   (Training)    │    │   (Prediction)  │    │   Collection    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         ▼                       ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   MLflow        │    │   Docker        │    │   Grafana       │
-│   Tracking      │    │   Container     │    │   Dashboard     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+┌─────────────────┐    ┌─────────────────────────────────────┐
+│   Jupyter       │    │   FastAPI Application              │
+│   Notebook      │───▶│   (Prediction + Prometheus)        │
+│   (Training)    │    │   ┌─────────────────────────────┐   │
+└─────────────────┘    │   │   Prediction API            │   │
+                       │   │   /predict                  │   │
+┌─────────────────┐    │   │   /health                   │   │
+│   MLflow        │    │   │   /metrics                  │   │
+│   Tracking      │    │   │   /prometheus               │   │
+└─────────────────┘    │   └─────────────────────────────┘   │
+                       └─────────────────────────────────────┘
+                                │
+                                ▼
+                       ┌─────────────────┐
+                       │   Grafana       │
+                       │   Dashboard     │
+                       └─────────────────┘
 ```
 
 ## 📁 Project Structure
@@ -116,8 +122,8 @@ docker-compose ps
 - **FastAPI App**: http://localhost:8000
 - **API Docs**: http://localhost:8000/docs
 - **Grafana**: http://localhost:3001 (admin/admin)
-- **Prometheus**: http://localhost:9090
 - **MLflow**: http://localhost:5000
+- **Metrics**: http://localhost:8000/metrics or http://localhost:8000/prometheus
 
 ## 📊 API Usage
 
@@ -179,7 +185,16 @@ black apps/
 uvicorn apps.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-## 📈 Monitoring
+## 📈 Integrated Monitoring
+
+### FastAPI + Prometheus Integration
+
+The system now uses **integrated Prometheus monitoring** within the FastAPI application, eliminating the need for a separate Prometheus server. This provides:
+
+- **Simplified Architecture**: Single service for API and metrics
+- **Reduced Resource Usage**: No separate Prometheus container needed
+- **Easier Deployment**: Fewer services to manage
+- **Direct Access**: Metrics available at `/metrics` and `/prometheus` endpoints
 
 ### Grafana Dashboard
 
@@ -188,13 +203,27 @@ The system includes a pre-configured Grafana dashboard with:
 - Response time tracking
 - Error rate alerts
 - Prediction endpoint usage
+- Custom business metrics
 
-### Prometheus Metrics
+### Available Metrics
 
-Key metrics collected:
+**Standard HTTP Metrics** (via prometheus-fastapi-instrumentator):
 - `http_requests_total` - Total HTTP requests
 - `http_request_duration_seconds` - Request duration
 - `http_requests_in_progress` - Active requests
+
+**Custom Business Metrics**:
+- `prediction_requests_total` - Total prediction requests
+- `prediction_duration_seconds` - Prediction processing time
+- `churn_predictions_total` - Churn predictions by result (true/false)
+- `model_load_status` - Model loading status (1=loaded, 0=not_loaded)
+
+### Metrics Endpoints
+
+- `/metrics` - Standard Prometheus metrics (from instrumentator)
+- `/prometheus` - Custom Prometheus metrics endpoint
+- `/health` - Health check with model status
+- `/model-info` - Model information and version
 
 ## 🔄 CI/CD Pipeline
 

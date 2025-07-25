@@ -1,0 +1,18 @@
+#! mlflow-D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\mlruns-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: mlflow-d--sp-jain-assignments-sdma-assignment-2-mlruns
+    namespace: assignment2
+    labels:
+        com.docker.compose.service: mlflow
+        com.docker.compose.volume: D:\SP JAIN ASSIGNMENTS\SDMA\Assignment 2\mlruns
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi
